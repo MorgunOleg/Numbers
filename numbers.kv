@@ -1,0 +1,143 @@
+#:kivy 2.2.0
+<GameScreen>:
+    FitImage:
+        source: '151.jpg'
+        size_hint: .8, .9
+        pos_hint: {"top": 1}
+
+
+    #MDRaisedButton:
+    #    text: "CLICK ME"
+    #    pos_hint: {"center_x": .5, "center_y": .5}
+
+    BoxLayout:
+        orientation: 'vertical'
+        padding: 20, 10
+        spacing: 10
+        GridLayout:
+            cols: 2
+            size_hint: 1, 0.2
+            spacing: 30, 10
+            Button:
+                text: 'Начать новую игру'
+                #size_hint: 1, 0.7
+                on_press: root.new_round()
+            Button:
+                text: 'Правила'
+                #size_hint: 1, 0.8
+                on_press: root.manager.current = 'rules'
+            Button:
+                id: next_rows_btn
+                text: 'Продлить ряды'
+                #size_hint: 1, 0.8
+                on_press: root.next_rows(self)
+                disabled: True
+            Button:
+                id: clear_rows_btn
+                text: 'Убрать пустые строки'
+                text_size: self.size
+                halign: 'center'
+                valign: 'middle'
+                #size_hint: 1, 0.8
+                on_press: root.clean_rows(self)
+                disabled: True
+
+        Button:
+            text: 'Выход'
+            size_hint: 1, 0.1
+            on_press: quit(0)
+        Label:
+            id: label
+            text_size: self.size
+            font_size: 40
+            halign: 'center'
+            valign: 'middle'
+            text:
+                '''Добро пожаловать в игру "Цифирки"!
+                Если знаешь, что делать - жми "Начать новую игру",
+                или освежи память в разделе "Правила"'''
+            size_hint: 1, 0.15
+
+        ScrollView:
+            size_hint: 1, 0.9
+            do_scroll_x: False
+            do_scroll_y: True
+            GridLayout:
+                id: btn_grid
+                cols: 9
+                #size_hint: None, None
+                #size_hint: 1, 0.9
+                size_hint_y: None
+                #height: self.texture_size[1]
+                #text_size: self.width, None
+                #padding: 10, 10
+                row_default_height: 80
+                padding: 20
+                spacing: 10
+                row_force_default: True
+                height: self.minimum_height
+
+
+<RulesScreen>:
+    FloatLayout:
+        orientation: 'vertical'
+        canvas:
+            Rectangle:
+                source: '151.jpg'
+                size: self.size
+                pos: self.pos
+    #BoxLayout:
+        #orientation: 'vertical'
+        ScrollView:
+            size_hint: 1, 0.9
+            do_scroll_x: False
+            do_scroll_y: True
+            Label:
+                #text_size: self.size
+                size_hint_y: None
+                font_size: 40
+                #halign: 'left'
+                valign: 'top'  # 'middle'
+                padding: 10
+                spacing: 10
+                #row_default_height: 80
+                row_force_default: True
+                #height: self.minimum_height
+                text:
+                    '''Рад приветствовать, дорогой друг!\n
+                    Эта игра пришла из моего детства,
+                    когда я "залипал" в нее на некоторых скучных
+                    уроках, рисуя цифирки на последних листах тетради :)\n
+                    Правила проще, чем может показаться.
+                    Первые стартовые 3 ряда всегда одинаковые
+                    и состоят из цифр чисел от 1 до 19 (кроме 10).
+                    Цифры надо "вычеркивать" попарно.
+                    Можно зачеркивать цифры, которые:
+                    - равны между собой или
+                    - в сумме образуют 10.
+                    Между этими цифрами не должно быть других цифр,
+                    при этом зачеркиваемые цифры могут располагаться:
+                    1) по горизонтали, например: ...* (5) * (5) *...
+                    или даже так:
+                    1 2 (3) * *   *  *
+                    *  *   *   * * (7) *\n
+                    !НО не так:
+                    *   *   * * /3/ 2 1
+                    * /7/ * *   *   *  *
+                    2) по вертикали:
+                    ...2 (6) *...
+                    ...*   *   5...
+                    ...* (4) *...
+                    ///Тут для наглядности надо добавить картинок///\n
+                    Когда пары кончились (или по желанию) можно
+                    добавить еще цифр кнопкой "Добавить ряды".
+                    В этом случае ряды достраиваются за счет
+                    повторения оставшихся цифр (кроме вычеркнутых).\n
+                    Цель игры - вычеркнуть все цифры с поля.'''
+                #size_hint: 1, 0.9
+
+        Button:
+            text: 'Вернуться к игре'
+            size_hint_y: None
+            on_press: root.manager.current = 'game'
+            size_hint: 1, 0.1
