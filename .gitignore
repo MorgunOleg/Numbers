@@ -1,0 +1,52 @@
+# === Python ===
+__pycache__/
+*.py[cod]
+*.pyo
+*.pyd
+*.so
+*.egg-info/
+*.log
+.env
+.venv
+*.sqlite3
+
+# === Byte-compiled / cache / virtual env ===
+*.pyc
+.cache/
+*.swp
+
+# === Kivy logs ===
+.kivy/
+.kv__*
+
+# === Buildozer ===
+.buildozer/
+bin/
+build/
+dist/
+*.apk
+*.tar.gz
+
+# === PyCharm / JetBrains ===
+.idea/
+*.iml
+*.ipr
+*.iws
+
+# === System files ===
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# === Backup files ===
+*~
+*_old.py
+*_backup.py
+*_test.py
+*_draft.py
+*.bak
+*.tmp
+
+# === Backup folders ===
+old_versions/
+_drafts/
