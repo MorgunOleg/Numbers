@@ -161,6 +161,16 @@ class NumbersApp(App):
         sm.add_widget(RulesScreen(name='rules'))
         return sm
 
+    # Окна предупреждения о выходе (закрытии приложения)
+    def on_request_close(self, *args):
+        self.confirm_exit()
+        return True
+
+    def confirm_exit(self):
+        from kivy.factory import Factory
+        popup = Factory.ExitPopup()
+        popup.open()
+
 
 if __name__ == '__main__':
     NumbersApp().run()
